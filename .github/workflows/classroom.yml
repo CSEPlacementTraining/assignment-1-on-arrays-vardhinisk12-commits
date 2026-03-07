@@ -19,11 +19,11 @@ jobs:
       with:
         test-name: Assignment-1 on Arrays
         setup-command: javac Assignment1.java
-        command: javac Assignment1.java  output=$(java Assignment1 | tr '\n' ' ' |
-          sed 's/ $//')  expected="2000 2004 2008 2012 2016 2020 2024 2028 2032 2036
-          2040 2044 2048 2052 2056"  if [ "$output" = "$expected" ]; then   echo "Test
-          Passed"   exit 0 else   echo "Test Failed"   echo "Expected:"   echo "$expected"   echo
-          "Got:"   echo "$output"   exit 1 fi
+        command: javac Assignment1.java; output=$(java Assignment1 | tr -d '\r' |
+          tr '\n' ' ' | sed 's/ $//'); expected="2000 2004 2008 2012 2016 2020 2024
+          2028 2032 2036 2040 2044 2048 2052 2056"; if [ "$output" = "$expected" ];
+          then echo "Test Passed"; exit 0; else echo "Test Failed"; echo "Expected:";
+          echo "$expected"; echo "Got:"; echo "$output"; exit 1; fi
         timeout: 15
         max-score: 10
     - name: Autograding Reporter
